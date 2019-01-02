@@ -11,6 +11,10 @@ export class TodoStore {
 
     constructor() { }
 
+    set todos(data) {
+        this._todos = data;    
+    }
+
     get(filter: string = 'all'): Todo[] {
 
         switch(filter) {

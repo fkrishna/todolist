@@ -16,10 +16,13 @@ export class AppComponent implements OnInit {
 
   private is_all_completed: boolean
 
-  constructor(private todoService: TodoService, private router: Router) { }
+  constructor(private todoService: TodoService, private router: Router) { 
+    this.is_all_completed = false;
+  }
 
    ngOnInit() {
-    this.is_all_completed = false;
+
+    this.todoService.init();
 
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -94,6 +97,7 @@ export class AppComponent implements OnInit {
     }
 
     todo.editing = false;
+    this.todoService.updateStorage();
   }
 
   clearInput(): void {

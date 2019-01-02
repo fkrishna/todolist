@@ -8,6 +8,7 @@ import { TodoService } from './todo/todo.service';
 import { TodoStore } from './todo/todoStore';
 import { MyFocusDirective } from './directives/my-focus.directive';
 import { AppRoutingModule } from './router/app-routing.module';
+import { LocalStorage } from './storage/local-storage';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { AppRoutingModule } from './router/app-routing.module';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [TodoService, TodoStore],
+  providers: [TodoService, TodoStore, LocalStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
