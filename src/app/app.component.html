@@ -1,0 +1,55 @@
+<section class="todoapp">
+
+  <header class="header">
+    <h1>Todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" [(ngModel)]="todostr" (keyup.enter)="newTodo()" myFocus>
+  </header>
+
+  <section class="main" *ngIf="!isEmpty()">
+    <input id="toggle-all" type="checkbox" class="toggle-all" [checked]="isAllCompleted()" (click)="toggleCompleteAll()">
+    <label for="toggle-all">Mark all as complete</label>
+
+    <ul class="todo-list">
+      <li *ngFor="let todo of todos;" [ngClass]="{ 'completed': todo.completed, 'editing': todo.editing }">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleComplete(todo)" [checked]="todo.completed">
+          <label (dblclick)="edit(todo)">{{ todo.title }}</label>
+          <button class="destroy" (click)="remove(todo)"></button>
+        </div>
+        
+        <input *ngIf="todo.editing" #inputNewTitle 
+        class="edit" 
+        [value]="todo.title"
+        (blur)="update(todo, inputNewTitle.value)"
+        (keyup.enter)="update(todo, inputNewTitle.value)"
+        (keyup.esc)="cancelEditing(todo, inputNewTitle)" myFocus>
+      </li>
+    </ul>
+  </section>
+
+  <footer class="footer" *ngIf="!isEmpty()">
+    <span class="todo-count"><strong>{{ todoService.remaining() }}</strong>&nbsp;Item(s) left</span>
+    <ul class="filters">
+      <li>
+        <a routerLinkActive="selected" routerLink="/all">All</a>
+      </li>
+      <li>
+        <a routerLinkActive="selected" routerLink="/active">Active</a>
+      </li>
+      <li>
+        <a routerLinkActive="selected" routerLink="/completed">Completed</a>
+      </li>
+    </ul>
+    <button class="clear-completed"
+    *ngIf="length !== todoService.remaining();" 
+    (click)="clearCompleted()">
+      Clear completed
+    </button>
+  </footer>
+
+</section>
+
+<footer class="info">
+  <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+  <p>Created by <a href="http://krishnafarvil.com">Krishna Farvil</a></p>
+</footer>
