@@ -10,7 +10,7 @@ import { Router, Event, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   
-  private todostr: string;
+  todostr: string;
 
   private filter: string
 
